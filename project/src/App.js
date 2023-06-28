@@ -15,7 +15,7 @@ export default function App() {
     }
     useEffect(()=>{
       getnews()
-    },[nowpage])
+    },[nowpage,getnews])
   const handlesubmit=(e)=>{
     e.preventDefault();
     setnowpage(1);
