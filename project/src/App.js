@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Newsitem from './Newsitem'
 import './App.css'
 export default function App() {
@@ -7,15 +7,13 @@ export default function App() {
   const [nowpage,setnowpage] =useState(1)
   const [totalpage,settotalpage]=useState(1)
     const getnews=async()=>{
-        var url=await fetch(`https://newsapi.org/v2/everything?q=${search}&from=2023-05-28&sortBy=publishedAt&apiKey=a7469a295f7b403da9683922e37c773c&pageSize=12&page=${nowpage}`)
+        var url=await fetch(`https://newsapi.org/v2/everything?q=${search}&from=2023-05-28&sortBy=publishedAt&apiKey=f4239de238d6409eaea7efb8ce9aba0e&pageSize=12&page=${nowpage}`)
         var data=await url.json()
         setnews(data.articles)
         if(data.articles)
         settotalpage(Math.ceil(data.totalResults)/9)
     }
-    useEffect(()=>{
-      getnews()
-    },[nowpage])
+
   const handlesubmit=(e)=>{
     e.preventDefault();
     setnowpage(1);
@@ -24,10 +22,12 @@ export default function App() {
   const handleprev=()=>{
     if(nowpage>1)
     setnowpage(nowpage-1)
+    getnews()
   }
   const handlenext=()=>{
     if(nowpage<totalpage)
     setnowpage(nowpage+1)
+    getnews()
   }
   return (
     <div className='container'>
@@ -39,7 +39,7 @@ export default function App() {
       <div className='main'>
       {news &&(
         news.map((item,index)=>{
-          return(<div key={index}className='newsitem' >
+          return(<div key={index} className='newsitem' >
             <Newsitem image={item.urlToImage} heading={item.title.slice(0,25)} description={item.description.slice(0,110)} link={item.url} />
           </div>
           )
@@ -54,3 +54,5 @@ export default function App() {
     </div>
   )
 }
+
+
