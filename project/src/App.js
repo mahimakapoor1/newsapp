@@ -7,7 +7,7 @@ export default function App() {
   const [nowpage,setnowpage] =useState(1)
   const [totalpage,settotalpage]=useState(1)
     const getnews=async()=>{
-        var url=await fetch(`https://newsapi.org/v2/everything?q=${search}&from=2023-05-28&sortBy=publishedAt&apiKey=78a81cb15a1e4a709a3b3f0a98af26aa&pageSize=12&page=${nowpage}`)
+        var url=await fetch(`https://newsapi.org/v2/everything?q=${search}&from=2023-05-28&sortBy=publishedAt&apiKey=f4239de238d6409eaea7efb8ce9aba0e&pageSize=12&page=${nowpage}`)
         var data=await url.json()
         setnews(data.articles)
         if(data.articles)
