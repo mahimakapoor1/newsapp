@@ -18,6 +18,7 @@ export default function App() {
 
   useEffect(() => {
     getNews();
+    // eslint-disable-next-line
   }, [search, nowpage]);
   const handlesubmit=(e)=>{
     e.preventDefault()
