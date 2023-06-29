@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Newsitem from './Newsitem'
 import './App.css'
 export default function App() {
@@ -19,11 +19,11 @@ export default function App() {
   useEffect(() => {
     getNews();
     // eslint-disable-next-line
-  }, [search, nowpage]);
+  }, [search, nowpage])
+
   const handlesubmit=(e)=>{
     e.preventDefault()
     setnowpage(1)
-    getNews()
   }
   const handleprev=()=>{
     if(nowpage>1)
@@ -61,6 +61,7 @@ export default function App() {
     </div>
   )
 }
+
 
 
 
