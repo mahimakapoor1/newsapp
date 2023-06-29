@@ -6,28 +6,31 @@ export default function App() {
   const [search,setsearch]=useState('')
   const [nowpage,setnowpage] =useState(1)
   const [totalpage,settotalpage]=useState(1)
-    const getnews=async()=>{
-        var url=await fetch(`https://newsapi.org/v2/everything?q=${search}&from=2023-05-28&sortBy=publishedAt&apiKey=f4239de238d6409eaea7efb8ce9aba0e&pageSize=12&page=${nowpage}`)
-        var data=await url.json()
-        setnews(data.articles)
-        if(data.articles)
-        settotalpage(Math.ceil(data.totalResults)/12)
+  
+  const getNews = async () => {
+    let url = await fetch(`https://newsapi.org/v2/everything?q=${search}&from=2023-05-29&sortBy=publishedAt&apiKey=f4239de238d6409eaea7efb8ce9aba0e&pagesize=12&page=${nowpage}`)
+    let jsonData = await url.json();
+    setnews(jsonData.articles);
+    if (jsonData.articles) {
+      settotalpage(Math.ceil(jsonData.totalResults / 12));
     }
+  };
 
+  useEffect(() => {
+    getNews();
+  }, [search, nowpage]);
   const handlesubmit=(e)=>{
-    e.preventDefault();
-    setnowpage(1);
-    getnews()
+    e.preventDefault()
+    setnowpage(1)
+    getNews()
   }
   const handleprev=()=>{
     if(nowpage>1)
     setnowpage(nowpage-1)
-    getnews()
   }
   const handlenext=()=>{
     if(nowpage<totalpage)
     setnowpage(nowpage+1)
-    getnews()
   }
   return (
     <div className='container'>
@@ -40,7 +43,10 @@ export default function App() {
       {news &&(
         news.map((item,index)=>{
           return(<div key={index} className='newsitem' >
-            <Newsitem image={item.urlToImage} heading={item.title.slice(0,25)} description={item.description.slice(0,110)} link={item.url} />
+            <Newsitem image={item.urlToImage}
+            heading={item.title ? item.title.slice(0, 25) : ''}
+            description={item.description ? item.description.slice(0, 110) : ''}
+            link={item.url} />
           </div>
           )
         })
@@ -54,5 +60,7 @@ export default function App() {
     </div>
   )
 }
+
+
 
 
