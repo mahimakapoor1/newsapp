@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import Newsitem from './Newsitem'
 import './App.css'
 export default function App() {
