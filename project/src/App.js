@@ -8,7 +8,7 @@ export default function App() {
   const [totalpage,settotalpage]=useState(1)
   
   const getNews = async () => {
-    let url = await fetch(`https://newsapi.org/v2/everything?q=${search}&from=2023-07-01&sortBy=publishedAt&apiKey=f4239de238d6409eaea7efb8ce9aba0e&pagesize=12&page=${nowpage}`)
+    let url = await fetch(`https://newsapi.org/v2/everything?q=${search}&from=2023-06-01&sortBy=publishedAt&apiKey=f4239de238d6409eaea7efb8ce9aba0e&pagesize=12&page=${nowpage}`)
     let jsonData = await url.json();
     setnews(jsonData.articles);
     if (jsonData.articles) {
